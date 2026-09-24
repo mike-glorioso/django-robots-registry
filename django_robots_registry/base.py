@@ -24,7 +24,11 @@ class RobotSpecProvider(ABC):
 
 def robots_txt_view(*robots: RobotSpecProvider) -> Callable[[HttpRequest], HttpResponse]:
     specs_providers = list(robots) if len(robots) else _robots
-    return lambda request, providers=specs_providers: robots_txt(providers)
+
+    def view(request: HttpRequest) -> HttpResponse:
+        return robots_txt(specs_providers)
+
+    return view
 
 
 def robots_txt(providers: Sequence[RobotSpecProvider]) -> HttpResponse:
