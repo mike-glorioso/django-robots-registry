@@ -2,6 +2,7 @@
 name = "django_robots_registry"
 version = "0.2.0"
 requires-python = ">=3.14.4"
+dependencies = ["Django>=6.1.1"]
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -9,6 +10,8 @@ build-backend = "setuptools.build_meta"
 
 [tool.pyright]
 typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
 
 [tool.ruff]
 line-length = 100
