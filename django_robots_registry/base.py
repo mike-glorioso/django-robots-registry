@@ -13,8 +13,7 @@ class RobotSpec:
 
 class _RobotSpecProviderBase(ABC):
     def __init__(self) -> None:
-        self._collect(self)
-        _robots.append(self)
+        self._collect()
 
     @abstractmethod
     def __call__(self) -> Sequence[RobotSpec] | RobotSpec: ...
@@ -23,12 +22,12 @@ class _RobotSpecProviderBase(ABC):
     def _collect(self) -> None: ...
 
 
-_robots: list[RobotSpecProviderBase] = []
-
-
 class RobotSpecProvider(_RobotSpecProviderBase):
     def _collect(self) -> None:
         _robots.append(self)
+
+
+_robots: list[RobotSpecProvider] = []
 
 
 def robots_txt_view(*robots: RobotSpecProvider) -> Callable[[HttpRequest], HttpResponse]:

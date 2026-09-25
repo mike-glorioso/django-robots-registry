@@ -42,3 +42,7 @@ rules based on runtime settings).
 Extracted from an internal project (glotronic.net), with full commit
 history preserved via `git subtree split`. Small and stable; grown
 on-demand as needed.
+
+## License
+
+BSD-3-Clause — see [LICENSE](LICENSE).
