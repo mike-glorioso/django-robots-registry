@@ -42,6 +42,6 @@ def robots_txt(providers: Sequence[RobotSpecProvider]) -> HttpResponse:
 
     body = ""
     for ua, instructions in instructions_by_ua.items():
-        body = body + f"\n{ua}\n{'\n'.join(instructions)}"
+        body = body + f"\nUser-Agent: {ua}\n{'\n'.join(instructions)}"
 
     return HttpResponse(body, content_type="text/plain")
