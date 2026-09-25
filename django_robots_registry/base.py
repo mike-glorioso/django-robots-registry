@@ -11,20 +11,12 @@ class RobotSpec:
     instruction: str
 
 
-class _RobotSpecProviderBase(ABC):
+class RobotSpecProvider(ABC):
     def __init__(self) -> None:
-        self._collect()
+        _robots.append(self)
 
     @abstractmethod
     def __call__(self) -> Sequence[RobotSpec] | RobotSpec: ...
-
-    @abstractmethod
-    def _collect(self) -> None: ...
-
-
-class RobotSpecProvider(_RobotSpecProviderBase):
-    def _collect(self) -> None:
-        _robots.append(self)
 
 
 _robots: list[RobotSpecProvider] = []
