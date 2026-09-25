@@ -12,18 +12,12 @@ class RobotSpec:
 
 
 class RobotSpecProvider(ABC):
-    def __init__(self) -> None:
-        _robots.append(self)
-
     @abstractmethod
     def __call__(self) -> Sequence[RobotSpec] | RobotSpec: ...
 
 
-_robots: list[RobotSpecProvider] = []
-
-
 def robots_txt_view(*robots: RobotSpecProvider) -> Callable[[HttpRequest], HttpResponse]:
-    specs_providers = list(robots) if len(robots) else _robots
+    specs_providers = list(robots)
 
     def view(request: HttpRequest) -> HttpResponse:
         return robots_txt(specs_providers)

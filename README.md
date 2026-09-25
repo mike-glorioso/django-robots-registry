@@ -1,6 +1,6 @@
 # django_robots_registry
 
-A small `robots.txt` view for Django, built around independently-registered
+A small `robots.txt` view for Django, built around independently-defined
 "providers" rather than one big config block — each app that needs to
 `Disallow` something owns its own rule, without needing to know about any
 other app's rules or edit a shared list.
@@ -27,11 +27,6 @@ urlpatterns = [
     path("robots.txt", robots_txt_view(MyAppRobots())),
 ]
 ```
-
-Instantiating a `RobotSpecProvider` also registers it into a module-level
-global list — calling `robots_txt_view()` with no arguments falls back to
-whatever's been instantiated globally by then, though passing providers
-explicitly (as above) is less fragile with respect to import order.
 
 `RobotSpecProvider.__call__` can return either a single `RobotSpec` or a
 `Sequence[RobotSpec]` (e.g. to conditionally contribute zero, one, or more
